@@ -97,12 +97,13 @@ You can drop a captioned image with a plain HTML `<figure>` block right inside
 Markdown — no special syntax, no layout breakage:
 
 <figure>
-  <img src="/images/sample-schematic.png" alt="IMU breakout wiring diagram" />
+  <img src="/blog/images/sample-schematic.png" alt="IMU breakout wiring diagram" />
   <figcaption>Figure 1. Breakout wiring: SDA/SCL pulled up to 3V3, INT on PB0.</figcaption>
 </figure>
 
-Put image files in <code>public/images/</code> and reference them as
-<code>/images/your-file.png</code>.
+Put image files in <code>public/images/</code>. Because this site is served
+from the <code>/blog</code> subpath, reference them as
+<code>/blog/images/your-file.png</code>.
 
 ## What I'd change
 

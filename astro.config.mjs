@@ -4,8 +4,12 @@ import rehypeKatex from 'rehype-katex';
 
 // https://astro.build/config
 export default defineConfig({
-  // Change this to your deployed URL (used for sitemaps / canonical links).
-  site: 'https://example.com',
+  // GitHub Pages settings.
+  //   site = https://<username>.github.io
+  //   base = '/<repo-name>'   (the leading slash matters; no trailing slash)
+  // If you name the repo something other than "blog", change `base` to match.
+  site: 'https://sujeeth-kanna.github.io',
+  base: '/blog',
 
   markdown: {
     remarkPlugins: [remarkMath],

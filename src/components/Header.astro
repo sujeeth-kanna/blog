@@ -1,13 +1,15 @@
 ---
+import { withBase } from '../utils/url';
+
 const links = [
-  { href: '/projects', label: 'projects' },
-  { href: '/notes', label: 'notes' },
-  { href: '/about', label: 'about' },
+  { href: withBase('projects'), label: 'projects' },
+  { href: withBase('notes'), label: 'notes' },
+  { href: withBase('about'), label: 'about' },
 ];
 ---
 
 <header class="site-header">
-  <a href="/" class="brand">~/sujeeth</a>
+  <a href={withBase('/')} class="brand">~/sujeeth</a>
   <nav class="site-nav">
     {links.map((l) => <a href={l.href}>{l.label}</a>)}
   </nav>

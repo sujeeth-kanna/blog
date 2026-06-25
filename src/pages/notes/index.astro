@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import { withBase } from '../../utils/url';
 
 const notes = (await getCollection('notes'))
   .filter((e) => !e.data.draft)
@@ -15,7 +16,7 @@ const fmt = (d) => d.toISOString().slice(0, 10);
   <ul class="entry-list">
     {notes.map((n) => (
       <li>
-        <a href={`/notes/${n.id}`}>{n.data.title}</a>
+        <a href={withBase(`notes/${n.id}`)}>{n.data.title}</a>
         <span class="date">{fmt(n.data.date)}</span>
       </li>
     ))}
