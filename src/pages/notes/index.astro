@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const notes = (await getCollection('notes'))
+  .filter((e) => !e.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const fmt = (d) => d.toISOString().slice(0, 10);
+---
+
+<Base title="Notes" description="A chronological digital garden.">
+  <h1>Notes</h1>
+  <p>Shorter entries — concepts I'm learning, proofs, and logic deep-dives.</p>
+  <ul class="entry-list">
+    {notes.map((n) => (
+      <li>
+        <a href={`/notes/${n.id}`}>{n.data.title}</a>
+        <span class="date">{fmt(n.data.date)}</span>
+      </li>
+    ))}
+  </ul>
+</Base>

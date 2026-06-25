@@ -1,0 +1,27 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description?: string;
+    date: Date;
+    tags?: string[];
+  };
+}
+const { frontmatter } = Astro.props;
+const dateStr = frontmatter.date.toISOString().slice(0, 10);
+---
+
+<Base title={frontmatter.title} description={frontmatter.description}>
+  <article>
+    <h1>{frontmatter.title}</h1>
+    <p class="post-meta">
+      <time datetime={dateStr}>{dateStr}</time>
+      {frontmatter.tags && frontmatter.tags.length > 0 && (
+        <> · {frontmatter.tags.join(', ')}</>
+      )}
+    </p>
+    <slot />
+  </article>
+</Base>

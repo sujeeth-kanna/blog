@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects'))
+  .filter((e) => !e.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const fmt = (d) => d.toISOString().slice(0, 10);
+---
+
+<Base title="Projects" description="Long-form project post-mortems.">
+  <h1>Projects</h1>
+  <p>Concrete post-mortems: design decisions, architecture, and what broke.</p>
+  <ul class="entry-list">
+    {projects.map((p) => (
+      <li>
+        <a href={`/projects/${p.id}`}>{p.data.title}</a>
+        <span class="date">{fmt(p.data.date)}</span>
+      </li>
+    ))}
+  </ul>
+</Base>

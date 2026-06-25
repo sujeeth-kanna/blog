@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const published = (c) => c.filter((e) => !e.data.draft);
+const byDate = (a, b) => b.data.date.valueOf() - a.data.date.valueOf();
+
+const projects = published(await getCollection('projects')).sort(byDate).slice(0, 5);
+const notes = published(await getCollection('notes')).sort(byDate).slice(0, 5);
+
+const fmt = (d) => d.toISOString().slice(0, 10);
+---
+
+<Base title="Sujeeth Kanna" description="Engineer. Portfolio and technical notes.">
+  <h1>Sujeeth Kanna</h1>
+  <p>
+    Engineer working close to the metal — embedded systems, signal processing,
+    and the math underneath. This site is a record of what I build and what I
+    learn. No tracking, no newsletter, no noise.
+  </p>
+
+  <h2>Recent projects</h2>
+  <ul class="entry-list">
+    {projects.map((p) => (
+      <li>
+        <a href={`/projects/${p.id}`}>{p.data.title}</a>
+        <span class="date">{fmt(p.data.date)}</span>
+      </li>
+    ))}
+  </ul>
+
+  <h2>Recent notes</h2>
+  <ul class="entry-list">
+    {notes.map((n) => (
+      <li>
+        <a href={`/notes/${n.id}`}>{n.data.title}</a>
+        <span class="date">{fmt(n.data.date)}</span>
+      </li>
+    ))}
+  </ul>
+</Base>

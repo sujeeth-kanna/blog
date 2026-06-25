@@ -1,0 +1,15 @@
+---
+// Optional helper for .astro pages. In plain Markdown you can write a raw
+// <figure> block (see the sample post) — both produce identical output.
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+const { src, alt, caption } = Astro.props;
+---
+
+<figure>
+  <img src={src} alt={alt} loading="lazy" />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
